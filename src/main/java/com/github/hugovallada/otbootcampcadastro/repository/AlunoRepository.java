@@ -2,6 +2,7 @@ package com.github.hugovallada.otbootcampcadastro.repository;
 
 import com.github.hugovallada.otbootcampcadastro.modelo.Aluno;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 }

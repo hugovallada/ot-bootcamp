@@ -23,12 +23,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/alunos")
 public class AlunoController {
 
-    private final AlunoRepository alunoRepository;
-
     @Autowired
-    public AlunoController(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
-    }
+    private AlunoRepository alunoRepository;
 
     @PostMapping
     @CacheEvict(value = "listarAlunosCache", allEntries = true)
