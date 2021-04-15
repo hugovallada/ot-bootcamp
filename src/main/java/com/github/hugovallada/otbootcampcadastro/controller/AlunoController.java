@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +50,7 @@ public class AlunoController {
 
     @GetMapping
     @Cacheable(value = "listarAlunosCache")
-    public Page<AlunoResponseDTO> listar(Pageable paginacao){
+    public Page<AlunoResponseDTO> listar(@PageableDefault  Pageable paginacao){
         Page<Aluno> alunos = alunoRepository.findAll(paginacao);
         return alunos.map(AlunoResponseDTO::new);
     }
