@@ -5,12 +5,18 @@ import com.github.hugovallada.otbootcampcadastro.dto.aluno.AlunoResponseDTO;
 import com.github.hugovallada.otbootcampcadastro.modelo.Aluno;
 import com.github.hugovallada.otbootcampcadastro.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/alunos")
@@ -24,6 +30,7 @@ public class AlunoController {
     }
 
     @PostMapping
+    @CacheEvict(value = "listarAlunosCache", allEntries = true)
     public void cadastrar(@RequestBody @Valid AlunoRequestDTO dto){
         alunoRepository.save(dto.toModel());
     }
@@ -38,5 +45,12 @@ public class AlunoController {
 
         return ResponseEntity.notFound().build();
 
+    }
+
+    @GetMapping
+    @Cacheable(value = "listarAlunosCache")
+    public Page<AlunoResponseDTO> listar(Pageable paginacao){
+        Page<Aluno> alunos = alunoRepository.findAll(paginacao);
+        return alunos.map(AlunoResponseDTO::new);
     }
 }
