@@ -27,4 +27,12 @@ public class UsuarioLoginRequestDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
 }
