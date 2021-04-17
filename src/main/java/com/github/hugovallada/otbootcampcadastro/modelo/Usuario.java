@@ -22,18 +22,24 @@ public class Usuario implements UserDetails {
 
     private String senha;
 
-    private String idade;
+    private Integer idade;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Roles> roles = new ArrayList<>();
 
-    public Usuario(Long id, String nome, String email, String senha, String idade, List<Roles> roles) {
-        this.id = id;
+    public Usuario(String nome, String email, String senha, Integer idade, List<Roles> roles) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.idade = idade;
         this.roles = roles;
+    }
+
+    public Usuario(String nome, String email, String senha, Integer idade) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.idade = idade;
     }
 
     public Usuario() {
@@ -65,7 +71,7 @@ public class Usuario implements UserDetails {
         return senha;
     }
 
-    public String getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 

@@ -35,7 +35,8 @@ public class SecurityConfigurations  extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+        web.ignoring()
+                .antMatchers("/h2-console/**");
     }
 
     @Override
@@ -44,6 +45,7 @@ public class SecurityConfigurations  extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/alunos").permitAll()
                 .antMatchers(HttpMethod.GET, "/alunos/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

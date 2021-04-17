@@ -16,6 +16,29 @@ public class Roles implements GrantedAuthority {
 
     private String titulo;
 
+    public Roles(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Roles() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     @Override
     public String getAuthority() {
         return this.titulo;
