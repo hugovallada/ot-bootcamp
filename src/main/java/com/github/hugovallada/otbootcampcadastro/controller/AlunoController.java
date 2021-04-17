@@ -50,4 +50,10 @@ public class AlunoController {
         Page<Aluno> alunos = alunoRepository.findAll(paginacao);
         return alunos.map(AlunoResponseDTO::new);
     }
+
+    @DeleteMapping("/{id}")
+    @CacheEvict(value = "listarAlunosCache" ,allEntries = true)
+    public void deletar(@PathVariable Long id) {
+        alunoRepository.deleteById(id);
+    }
 }
